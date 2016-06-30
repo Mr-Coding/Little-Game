@@ -1,35 +1,47 @@
-package swing_1;
+package swing_2;
+import java.awt.*;
 import java.awt.event.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 /**
- * äº‹ä»¶ç±»ï¼Œç»§æ‰¿äº†MyFrameç±»
+ *
  * @author thech
  */
-public class MyEvent extends MyFrame{
-    public MyEvent(){}
-    public static int number  = (int)(Math.random()*101);          
-    public void init(){
-        System.out.println(number);   
-        b1.addActionListener(new ActionListener(){           
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try{
-                    String user = t.getText();
-                    int user2 = Integer.parseInt(user); //Stringè½¬ä¸ºintä¸å¤ªæ‡‚ï¼Œè¦ç ”ç©¶ä¸€ä¸‹
-                    if(user2 == number){
-                        JOptionPane.showMessageDialog(null,"å¯¹å•¦ï¼");
-                        MyEvent.number = (int)(Math.random()*101);
-                        System.out.println(number);
-                    }else if(user2 < number){
-                        JOptionPane.showMessageDialog(null,"å°å•¦ï¼");
-                    }else if(user2 > number){
-                        JOptionPane.showMessageDialog(null, "å¤§å•¦ï¼");
-                    }
-                }
-                catch(NumberFormatException ex){
-                    JOptionPane.showMessageDialog(null,"è¯·å¡«å…¥çŒœå‡ºçš„æ•°å­—ï¼");
-                }
-            }      
-        }); 
+public class MyEvent implements ActionListener{
+    JTextField t;   JLabel l;
+    int number = (int)(Math.random()*101);
+    /**
+     *
+     * @param t
+     * @param l
+     */
+    public MyEvent(JTextField t,JLabel l){
+        this.t = t;
+        this.l = l;     
+    }
+    @Override
+    public void actionPerformed(ActionEvent e){
+        System.out.println(number);
+        try{ //while(true){
+            String str1 = this.t.getText();
+            int user = Integer.parseInt(str1);
+            String str2 = this.l.getText();
+            if(user == number){
+                JOptionPane.showMessageDialog(null, "¶ÔÀ²£¡^-^");
+                this.number = (int)(Math.random()*10);               
+                //this.t.setText("");
+                //int label = 0;
+                //++label;
+                //this.l.setText("µÃ·Ö£º" + label);continue;
+            }else if(user < number){
+                this.t.setText("");
+                JOptionPane.showMessageDialog(null, "Ğ¡À²£¡@_@");//break;
+            }else if(user > number){
+                this.t.setText("");
+                JOptionPane.showMessageDialog(null, "´óÀ²£¡@_@");//break;
+            }//}
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null,"ÇëÌîÈëÊı×Ö£¡" + ex);
+        }
+        //}
     }
 }
